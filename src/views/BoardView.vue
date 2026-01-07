@@ -68,6 +68,8 @@ function  moveTasks(taks) {
 }
 
 function onAddTask() {
+  // tasks.value = null
+  editTask.value = false
   showAddTaskModal.value = true;
 }
 
