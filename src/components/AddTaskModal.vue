@@ -63,7 +63,9 @@
 
       <div class="modal-footer">
         <button class="btn cancel" @click="$emit('close-task')" >Cancel</button>
-        <button class="btn primary" @click="onSubmit" >Add Task</button>
+        <button v-if="props.editMode" class="btn delete" @click="onDelete" >Delete</button>
+        <button v-if="!props.editMode" class="btn primary" @click="onSubmit" >Add Task</button>
+        <button v-else class="btn primary" @click="onSubmit" >Update Task</button>
       </div>
     </div>
   </div>
@@ -74,9 +76,20 @@
 import * as yup from "yup";
 import {useField, useForm} from "vee-validate";
 import AddTaskModal from "@/components/AddTaskModal.vue";
-import { defineEmits } from 'vue'
+import {onMounted, provide} from 'vue'
 
-const emit = defineEmits(['clicked'])
+
+const emit = defineEmits(['clicked','updated', 'deleted']);
+
+const props = defineProps<{ task?: any , editMode: boolean }>();
+onMounted(() => {
+  if (props.editMode) {
+    setValues(
+        props.task
+    )
+  }
+})
+
 
 // form validation and setup
 
@@ -87,7 +100,7 @@ const schema = yup.object({
   priority : yup.string().required("Priority is required"),
 })
 
-const { handleSubmit  } = useForm({
+const { handleSubmit , setValues } = useForm({
    validationSchema: schema,
   initialValues: {
      status: "To do",
@@ -101,8 +114,16 @@ const { value : status , errorMessage : statusError } = useField("status");
 const { value : priority , errorMessage : priorityError } = useField("priority");
 
 const onSubmit = handleSubmit( ( values ) => {
-    emit('clicked',values);
+    props.editMode ? emit('updated',values) : emit('clicked',values);
 } )
+
+function onDelete() {
+  console.log(props.task.id)
+  emit('deleted', props.task)
+}
+
+
+
 
 
 
@@ -175,6 +196,11 @@ const onSubmit = handleSubmit( ( values ) => {
 
 .btn.cancel {
   background: #e5e7eb;
+}
+
+.btn.delete  {
+  background-color: red;
+  color: white;
 }
 
 .btn.primary {

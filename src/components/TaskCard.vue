@@ -1,5 +1,10 @@
 <template>
-  <div v-if="props.task?.title" class="task-card">
+  <div
+      v-if="props.task?.title"
+      class="task-card"
+      draggable="true"
+      @dragstart="dragStart"
+      @click="updateTask(props.task)"  >
     <div class="task-title">{{ props.task?.title }}</div>
     <div class="task-meta">
       <span class="tag">{{ props.task.description }}</span>
@@ -15,7 +20,20 @@
 
 <script setup lang="ts" >
 
-  import {onMounted} from "vue";
+import {inject, onMounted} from "vue";
+
+  const emit = defineEmits(['update:task']);
+
+  const sendToBoardView = inject("sendToBoardView");
+
+  function updateTask(task) {
+    sendToBoardView(task);
+  }
+
+const dragStart = (event: DragEvent) => {
+  if (!props.task) return;
+  event.dataTransfer?.setData('task', JSON.stringify(props.task));
+};
 
   type Task = {
     id : number,

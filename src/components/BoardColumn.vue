@@ -1,5 +1,5 @@
 <template>
-  <div class="board-column">
+  <div class="board-column" @drop="onDrop"  @dragover.prevent>
     <div class="column-header">
       <h2 class="column-title">{{ props.column.title }}</h2>
       <span class="task-count">{{ props.column.tasks.length }}</span>
@@ -83,5 +83,20 @@ type Column = {
 const props = defineProps<{
   column: Column
 }>()
+
+const emit = defineEmits(['move-task'])
+
+const onDrop = (event: DragEvent) => {
+  const taskData = event.dataTransfer?.getData('task');
+  if (!taskData) return;
+
+  const task = JSON.parse(taskData);
+  // Update task status
+  const updatedTask = { ...task, status: props.column.status };
+
+
+  // Emit to parent to handle task movement
+  emit('move-task', updatedTask);
+};
 
 </script>
