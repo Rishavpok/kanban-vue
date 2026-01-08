@@ -4,6 +4,10 @@ body {
     margin: 0;
     padding:0;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center; /* horizontal center */
+    align-items: center;     /* vertical center */
+    height: 100vh;           /* full viewport height */
 }
 
 .display-flex {
