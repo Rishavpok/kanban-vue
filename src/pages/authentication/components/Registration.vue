@@ -1,5 +1,6 @@
 
 <template>
+<div class="login-wrapper" >
   <div class="register-card">
     <h2>Create Account</h2>
 
@@ -23,7 +24,7 @@
             id="email"
             placeholder="Enter your full name" />
 
-                <span class="error" >{{ nameError }}</span>
+        <span class="error" >{{ nameError }}</span>
       </div>
 
       <div class="field-group">
@@ -46,7 +47,7 @@
             id="password"
             placeholder="Enter your password again" />
 
-                <span class="error" >{{ conformPasswordError }}</span>
+        <span class="error" >{{ conformPasswordError }}</span>
 
       </div>
 
@@ -57,6 +58,7 @@
       Already have an account? <a @click="login" >Login</a>
     </div>
   </div>
+</div>
 </template>
 
 <script setup lang="ts">

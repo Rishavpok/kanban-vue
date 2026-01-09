@@ -81,7 +81,7 @@ type Column = {
 
 
 const props = defineProps<{
-  column: Column
+  column: Column,
 }>()
 
 const emit = defineEmits(['move-task'])

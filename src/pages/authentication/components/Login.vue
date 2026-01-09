@@ -1,42 +1,45 @@
 <template>
-  <div class="register-card">
-    <h2>Login</h2>
+ <div class="login-wrapper" >
+   <div class="register-card">
+     <h2>Login</h2>
 
-    <form @submit.prevent="onSubmit" >
-      <div class="field-group">
-        <label for="email">Email</label>
-        <input
-            v-model="email"
-            type="email"
-            id="email"
-            placeholder="Enter your email" />
+     <form @submit.prevent="onSubmit" >
+       <div class="field-group">
+         <label for="email">Email</label>
+         <input
+             v-model="email"
+             type="email"
+             id="email"
+             placeholder="Enter your email" />
 
-        <span class="error" > {{ emailError }} </span>
-      </div>
+         <span class="error" > {{ emailError }} </span>
+       </div>
 
-      <div class="field-group">
-        <label for="password">Password</label>
-        <input
-            v-model="password"
-            type="password"
-            id="password"
-            placeholder="Enter your password" />
+       <div class="field-group">
+         <label for="password">Password</label>
+         <input
+             v-model="password"
+             type="password"
+             id="password"
+             placeholder="Enter your password" />
 
-        <span class="error" > {{ passwordError }} </span>
-      </div>
+         <span class="error" > {{ passwordError }} </span>
+       </div>
 
-      <button
-          :disabled="isLoading"
-          type="submit"
-          class="submit-btn">
-        {{ isLoading ? "...." : "Login" }}
-      </button>
-    </form>
+       <button
+           :disabled="isLoading"
+           type="submit"
+           class="submit-btn">
+         {{ isLoading ? "...." : "Login" }}
+       </button>
+     </form>
 
-    <div class="login-link">
-      Already have an account? <a @click="register" >Register</a>
-    </div>
-  </div>
+     <div class="login-link">
+       Already have an account? <a @click="register" >Register</a>
+     </div>
+   </div>
+
+ </div>
 </template>
 <script setup lang="ts">
 
@@ -90,6 +93,7 @@ function register() {
 </script>
 
 <style scoped>
+
 .register-card {
   background: #ffffff;
   width: 360px;

@@ -4,9 +4,9 @@ body {
     margin: 0;
     padding:0;
     box-sizing: border-box;
-    display: flex;
-    justify-content: center; /* horizontal center */
-    align-items: center;     /* vertical center */
+    /*display: flex;*/
+    /*justify-content: center; !* horizontal center *!*/
+    /*align-items: center;     !* vertical center *!*/
     height: 100vh;           /* full viewport height */
 }
 
@@ -47,4 +47,16 @@ body {
     text-align: center;
     color: red;
     font-size: 12px;
+}
+
+.login-wrapper {
+    position: fixed; /* cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid; /* safe way to center without flex */
+    place-items: center; /* centers content horizontally and vertically */
+    background: #f4f5f7; /* optional: light background */
+    z-index: 999; /* optional: make sure it's above other content */
 }

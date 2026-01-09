@@ -17,10 +17,16 @@ export const useTasks = defineStore("tasks", () => {
     function addTask(task) {
         const column = columns.value.find(c => c.status === task.status);
         if (column) {
-            column.tasks.push( { ...task, id : crypto.randomUUID() });
+            column.tasks.push(task);
         }
 
         save();
+    }
+
+    function setTasksByStatus(status: string, tasks: any[]) {
+        const column = columns.value.find(c => c.status === status);
+        if (!column) return;
+        column.tasks = tasks;
     }
 
     function updateTask(updatedTask) {
@@ -60,7 +66,7 @@ export const useTasks = defineStore("tasks", () => {
 
 
     function save() {
-        localStorage.setItem("columns", JSON.stringify(columns.value));
+        // localStorage.setItem("columns", JSON.stringify(columns.value));
     }
 
     function resetBoard() {
@@ -68,5 +74,5 @@ export const useTasks = defineStore("tasks", () => {
         save();
     }
 
-    return { columns, addTask  , updateTask, removeTask};
+    return { columns, addTask  , updateTask, removeTask, setTasksByStatus};
 });
