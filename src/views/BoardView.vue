@@ -1,7 +1,7 @@
 <template>
   <div class="board-view">
     <div class="board-header">
-      <h1 class="board-title">Kanban Board</h1>
+      <h1 class="board-title">Kanban Boards</h1>
     </div>
 
     <div class="board-columns">
